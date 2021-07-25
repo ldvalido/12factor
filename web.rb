@@ -15,6 +15,7 @@ before do
   I18n.locale = I18n.default_locale
 end
 
+set :bind, '0.0.0.0'
 before '/:locale/*' do
   locale = params[:locale].to_sym
   if locale != I18n.default_locale && I18n.available_locales.include?(locale)
@@ -23,12 +24,14 @@ before '/:locale/*' do
   end
 end
 
+set :bind, '0.0.0.0'
 get '/' do
   erb :home
 end
 
 TOC = %w(codebase dependencies config backing-services build-release-run processes port-binding concurrency disposability dev-prod-parity logs admin-processes)
 
+set :bind, '0.0.0.0'
 get '/:factor' do |factor|
   halt 404 unless TOC.include?(factor)
   @factor = factor
